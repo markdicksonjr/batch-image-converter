@@ -95,6 +95,7 @@ func convertFileIfMatch(name string, from string, to string, quitOnError bool, d
 			if err != nil {
 				return err
 			}
+			file.Close()
 
 			outFile, err := openOrCreate(newName)
 			if quitOnError && err != nil {
@@ -148,6 +149,7 @@ func convertFileIfMatch(name string, from string, to string, quitOnError bool, d
 			}
 
 			if deleteOriginal {
+				outFile.Close()
 				err := os.Remove(name)
 
 				if quitOnError && err != nil {
